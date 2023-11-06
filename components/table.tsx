@@ -11,6 +11,9 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+import { EditDialog } from "./edit-dialog"
+import { MissingDialog } from "./missing-dialog"
+import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
 
 const invoices = [
@@ -19,45 +22,8 @@ const invoices = [
     name: "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid",
     image: "/avocado.jpg",
     brand: "Hormen Black Labelmany",
-    price: "$250.00",
-    total: "$250.00",
-    quantity: "Credit Card",
-  },
-  {
-    id: "nice",
-    name: "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid",
-    image: "/avocado.jpg",
-    brand: "Hormen Black Labelmany",
-    price: "$250.00",
-    total: "$250.00",
-    quantity: "Credit Card",
-  },
-  {
-    id: "nice",
-    name: "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid",
-    image: "/avocado.jpg",
-    brand: "Hormen Black Labelmany",
-    price: "$250.00",
-    total: "$250.00",
-    quantity: "Credit Card",
-  },
-  {
-    id: "nice",
-    name: "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid",
-    image: "/avocado.jpg",
-    brand: "Hormen Black Labelmany",
-    price: "$250.00",
-    total: "$250.00",
-    quantity: "Credit Card",
-  },
-  {
-    id: "nice",
-    name: "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid",
-    image: "/avocado.jpg",
-    brand: "Hormen Black Labelmany",
-    price: "$250.00",
-    total: "$250.00",
-    quantity: "Credit Card",
+    price: "250",
+    quantity: "500",
   },
 ]
 
@@ -67,12 +33,14 @@ export function ProductsTable() {
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px] font-bold"></TableHead>
-          <TableHead className="font-bold">Product name</TableHead>
+          <TableHead className="max-w-[200px] font-bold">
+            Product name
+          </TableHead>
           <TableHead className="font-bold">Brand</TableHead>
           <TableHead className="font-bold">Price</TableHead>
           <TableHead className="font-bold">Quantity</TableHead>
           <TableHead className="font-bold">Total</TableHead>
-          <TableHead className="font-bold text-right">Status</TableHead>
+          <TableHead className="font-bold">Status</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -89,9 +57,17 @@ export function ProductsTable() {
             <TableCell className="max-w-[200px]">{invoice.name}</TableCell>
             <TableCell>{invoice.brand}</TableCell>
             <TableCell>{invoice.price}</TableCell>
-            <TableCell>{invoice.quantity}</TableCell>
-            <TableCell>{invoice.total}</TableCell>
-            <TableCell className="flex items-center justify-end">
+            <TableCell className="flex items-center gap-2">
+              {invoice.quantity}
+              <span className="block"> x 6 * 1LB</span>
+            </TableCell>
+            <TableCell>
+              ${Number(invoice.price) * Number(invoice.quantity)}
+            </TableCell>
+            <TableCell className="flex items-center">
+              <div className="flex justify-center flex-1">
+                <Badge variant="destructive">Missing</Badge>
+              </div>
               <Button
                 variant={"ghost"}
                 size={"icon"}
@@ -99,14 +75,8 @@ export function ProductsTable() {
               >
                 <Check />
               </Button>
-              <Button
-                variant={"ghost"}
-                size={"icon"}
-                className="text-destructive"
-              >
-                <X />
-              </Button>
-              <Button variant={"ghost"}>Edit</Button>
+              <MissingDialog />
+              <EditDialog />
             </TableCell>
           </TableRow>
         ))}
