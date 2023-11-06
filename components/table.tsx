@@ -56,7 +56,7 @@ export function ProductsTable() {
             </TableCell>
             <TableCell className="max-w-[200px]">{invoice.name}</TableCell>
             <TableCell>{invoice.brand}</TableCell>
-            <TableCell>{invoice.price}</TableCell>
+            <TableCell>${invoice.price}</TableCell>
             <TableCell className="flex items-center gap-2">
               {invoice.quantity}
               <span className="block"> x 6 * 1LB</span>
