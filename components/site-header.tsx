@@ -1,12 +1,11 @@
-import Link from "next/link"
 import { ShoppingCart } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
-import { ThemeToggle } from "@/components/theme-toggle"
+
+import { UserDropdown } from "./user-dropdown"
 
 export function SiteHeader() {
   return (
@@ -28,9 +27,10 @@ export function SiteHeader() {
                 5
               </div>
               <ShoppingCart className="w-5 h-5 fill-current" />
-              <span className="sr-only">Twitter</span>
+              <span className="sr-only">Shopping Cart</span>
             </div>
           </nav>
+          <UserDropdown />
         </div>
       </div>
     </header>

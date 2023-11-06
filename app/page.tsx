@@ -12,9 +12,9 @@ import {
   Snowflake,
 } from "lucide-react"
 
-import { siteConfig } from "@/config/site"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { ProductsTable } from "@/components/table"
 
 export default function IndexPage() {
   return (
@@ -28,7 +28,9 @@ export default function IndexPage() {
           <div className="flex items-center justify-between">
             <span className="text-2xl font-bold">Order 32457ABC</span>
             <div className="flex items-center gap-4">
-              <Button variant={"outline"}>Back</Button>
+              <Button variant="outline" className="border-primary text-primary">
+                Back
+              </Button>
               <Button>Approve Order</Button>
             </div>
           </div>
@@ -42,15 +44,15 @@ export default function IndexPage() {
           </div>
           <div className="p-4">
             <span className="font-semibold text-gray-500">Shipping date</span>
-            <p>East coast fruits & vegetables</p>
+            <p>Thu, Feb 10</p>
           </div>
           <div className="p-4">
             <span className="font-semibold text-gray-500">Total</span>
-            <p>East coast fruits & vegetables</p>
+            <p>$ 15,028.3</p>
           </div>
           <div className="p-4">
             <span className="font-semibold text-gray-500">Category</span>
-            <div className="grid grid-cols-4 grid-rows-2 gap-2">
+            <div className="grid grid-cols-4 grid-rows-2 gap-2 text-gray-700">
               <Apple />
               <Cherry />
               <Grape />
@@ -70,7 +72,7 @@ export default function IndexPage() {
             <p>Awaiting your approval</p>
           </div>
         </div>
-        <div className="p-6 rounded-md shadow-lg bg-background text-foreground">
+        <div className="p-6 mb-8 space-y-4 rounded-md shadow-lg bg-background text-foreground">
           <div className="flex items-center gap-8">
             <Input
               placeholder="Search..."
@@ -79,10 +81,16 @@ export default function IndexPage() {
             <Button variant="outline" className="border-primary text-primary">
               Add Item
             </Button>
-            <Button variant={"ghost"} size={"icon"} className="text-primary">
+            <Button
+              variant={"ghost"}
+              size={"icon"}
+              className="text-primary hover:text-primary"
+            >
               <PrinterIcon />
             </Button>
           </div>
+
+          <ProductsTable />
         </div>
       </div>
     </section>
