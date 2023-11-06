@@ -13,6 +13,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import AddProduct from "@/components/add-product"
 import { ProductsTable } from "@/components/table"
 
 export default function IndexPage() {
@@ -77,9 +78,7 @@ export default function IndexPage() {
               placeholder="Search..."
               className="max-w-sm mr-auto font-medium"
             />
-            <Button variant="outline" className="border-primary text-primary">
-              Add Item
-            </Button>
+            <AddProduct />
             <Button
               variant={"ghost"}
               size={"icon"}

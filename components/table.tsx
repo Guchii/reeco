@@ -1,7 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
+"use client"
 
 import { Check, X } from "lucide-react"
+import { useDispatch, useSelector } from "react-redux"
 
+import { editProduct } from "@/lib/actions/product"
+import { Status } from "@/lib/reducers/product"
+import { RootState } from "@/lib/store"
 import {
   Table,
   TableBody,
@@ -16,38 +21,9 @@ import { MissingDialog } from "./missing-dialog"
 import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
 
-export enum Status {
-  Missing = "Missing",
-  MissingUrgent = "Missing - Urgent",
-  Approved = "Approved",
-  PriceUpdated = "Price Updated",
-  QuantityUpdated = "Price Updated",
-  PriceQuantityUpdated = "Price and Quantity Updated",
-  Available = "Available",
-}
-
-const invoices = [
-  {
-    id: "nice",
-    name: "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid",
-    image: "/avocado.jpg",
-    brand: "Hormen Black Labelmany",
-    status: Status.Missing,
-    price: "250",
-    quantity: "500",
-  },
-  {
-    id: "nice2",
-    name: "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid",
-    image: "/avocado.jpg",
-    brand: "Hormen Black Labelmany",
-    status: Status.PriceQuantityUpdated,
-    price: "250",
-    quantity: "500",
-  },
-]
-
 export function ProductsTable() {
+  const products = useSelector((state: RootState) => state.products)
+  const dispatch = useDispatch()
   return (
     <Table>
       <TableHeader>
@@ -64,40 +40,49 @@ export function ProductsTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.id}>
+        {products.map((product) => (
+          <TableRow key={product.id}>
             <TableCell className="font-medium">
               <img
                 src="/avocado.jpg"
                 height={50}
                 width={50}
-                alt={invoice.name}
+                alt={product.name}
               />
             </TableCell>
-            <TableCell className="max-w-[200px]">{invoice.name}</TableCell>
-            <TableCell>{invoice.brand}</TableCell>
-            <TableCell>${invoice.price}</TableCell>
+            <TableCell className="max-w-[200px]">{product.name}</TableCell>
+            <TableCell>{product.brand}</TableCell>
+            <TableCell>${product.price}</TableCell>
             <TableCell className="flex items-center gap-2">
-              <span className="font-bold">{invoice.quantity}</span> x 6 * 1LB
+              <span className="font-bold">{product.quantity}</span> x 6 * 1LB
             </TableCell>
             <TableCell>
-              ${Number(invoice.price) * Number(invoice.quantity)}
+              ${Number(product.price) * Number(product.quantity)}
             </TableCell>
             <TableCell className="flex items-center gap-4">
               <div className="flex justify-center flex-1">
-                <Badge className="justify-center w-full">
-                  {invoice.status}
-                </Badge>
+                {product.status ? (
+                  <Badge className="justify-center w-full">
+                    {product.status}
+                  </Badge>
+                ) : null}
               </div>
               <Button
                 variant={"ghost"}
                 size={"icon"}
                 className="text-green-700"
+                onClick={() =>
+                  dispatch(
+                    editProduct(product.id, {
+                      status: Status.Approved,
+                    })
+                  )
+                }
               >
                 <Check />
               </Button>
-              <MissingDialog />
-              <EditDialog />
+              <MissingDialog id={product.id} />
+              <EditDialog product={product} />
             </TableCell>
           </TableRow>
         ))}

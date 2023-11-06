@@ -1,7 +1,10 @@
 "use client"
 
 import { X } from "lucide-react"
+import { useDispatch } from "react-redux"
 
+import { editProduct } from "@/lib/actions/product"
+import { Status } from "@/lib/reducers/product"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,7 +18,8 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 
-export function MissingDialog() {
+export function MissingDialog({ id }: { id: string }) {
+  const dispatch = useDispatch()
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -43,14 +47,14 @@ export function MissingDialog() {
         <AlertDialogFooter>
           <AlertDialogCancel
             onClick={() => {
-              console.log("cancel")
+              dispatch(editProduct(id, { status: Status.Missing }))
             }}
           >
             No
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
-              console.log("continue")
+              dispatch(editProduct(id, { status: Status.MissingUrgent }))
             }}
           >
             Yes

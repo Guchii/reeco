@@ -1,9 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-import { useMemo, useRef, useState } from "react"
+import { useMemo, useState } from "react"
 import { MinusIcon, PlusIcon } from "lucide-react"
+import { useDispatch } from "react-redux"
 
+import { editProduct } from "@/lib/actions/product"
+import { Status } from "@/lib/reducers/product"
+import { RootState } from "@/lib/store"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -19,16 +23,22 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 import { Input } from "./ui/input"
 
-export function EditDialog() {
-  const numberRef = useRef<HTMLInputElement>(null)
+export function EditDialog({
+  product,
+}: {
+  product: RootState["products"][number]
+}) {
   const [open, setOpen] = useState(false)
-  const [price, setPrice] = useState<undefined | number>(undefined)
-  const [quantity, setQuantity] = useState<undefined | number>(undefined)
-  const [reason, setReason] = useState<string>("")
+  const [price, setPrice] = useState<undefined | number>(Number(product.price))
+  const [quantity, setQuantity] = useState<undefined | number>(
+    Number(product.quantity)
+  )
+  const [reason, setReason] = useState<string>(product.changeReason || "")
   const total = useMemo(
     () => (price && quantity ? price * quantity : 0),
     [price, quantity]
   )
+  const dispatch = useDispatch()
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -38,6 +48,25 @@ export function EditDialog() {
         <form
           onSubmit={(e) => {
             e.preventDefault()
+            let changes = {}
+            let changeCount = 0
+            if (price !== product.price) {
+              changes = { ...changes, price, status: Status.PriceUpdated }
+              changeCount++
+            }
+
+            if (quantity !== product.quantity) {
+              changes = { ...changes, quantity, status: Status.QuantityUpdated }
+              changeCount++
+            }
+
+            if (changeCount === 2)
+              changes = { ...changes, status: Status.PriceQuantityUpdated }
+
+            if (reason && changeCount > 0)
+              changes = { ...changes, changeReason: reason }
+
+            dispatch(editProduct(product.id, changes))
             setOpen(false)
           }}
         >
@@ -95,7 +124,6 @@ export function EditDialog() {
                     min={0}
                     required
                     className="max-w-[100px]"
-                    ref={numberRef}
                     placeholder="10"
                     type="number"
                   />
