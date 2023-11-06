@@ -1,4 +1,3 @@
-import Link from "next/link"
 import {
   Apple,
   Beer,
@@ -37,7 +36,7 @@ export default function IndexPage() {
         </div>
       </div>
       <div className="container flex flex-col gap-4">
-        <div className="flex p-6 [&>div]:w-full [&>div]:space-y-2 mt-4 font-bold divide-x-2 rounded-md shadow-lg">
+        <div className="flex p-6 flex-wrap [&>div]:w-1/6 [&>div]:space-y-2 mt-4 font-bold divide-x-2 rounded-md shadow-lg">
           <div className="p-4">
             <span className="font-semibold text-gray-500">Supplier</span>
             <p>East coast fruits & vegetables</p>
@@ -48,7 +47,7 @@ export default function IndexPage() {
           </div>
           <div className="p-4">
             <span className="font-semibold text-gray-500">Total</span>
-            <p>$ 15,028.3</p>
+            <p className="text-2xl">$ 15,028.3</p>
           </div>
           <div className="p-4">
             <span className="font-semibold text-gray-500">Category</span>
