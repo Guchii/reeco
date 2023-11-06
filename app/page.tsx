@@ -1,8 +1,20 @@
 import Link from "next/link"
-import { Cherry, ChevronRight } from "lucide-react"
+import {
+  Apple,
+  Beer,
+  Cherry,
+  ChevronRight,
+  Drumstick,
+  Egg,
+  GlassWater,
+  Grape,
+  PrinterIcon,
+  Snowflake,
+} from "lucide-react"
 
 import { siteConfig } from "@/config/site"
 import { Button, buttonVariants } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 export default function IndexPage() {
   return (
@@ -38,15 +50,15 @@ export default function IndexPage() {
           </div>
           <div className="p-4">
             <span className="font-semibold text-gray-500">Category</span>
-            <div className="grid grid-cols-4 grid-rows-2">
+            <div className="grid grid-cols-4 grid-rows-2 gap-2">
+              <Apple />
               <Cherry />
-              <Cherry />
-              <Cherry />
-              <Cherry />
-              <Cherry />
-              <Cherry />
-              <Cherry />
-              <Cherry />
+              <Grape />
+              <Snowflake />
+              <Egg />
+              <GlassWater />
+              <Drumstick />
+              <Beer />
             </div>
           </div>
           <div className="p-4">
@@ -56,6 +68,20 @@ export default function IndexPage() {
           <div className="p-4">
             <span className="font-medium text-gray-500">Status</span>
             <p>Awaiting your approval</p>
+          </div>
+        </div>
+        <div className="p-6 rounded-md shadow-lg bg-background text-foreground">
+          <div className="flex items-center gap-8">
+            <Input
+              placeholder="Search..."
+              className="max-w-sm mr-auto font-medium"
+            />
+            <Button variant="outline" className="border-primary text-primary">
+              Add Item
+            </Button>
+            <Button variant={"ghost"} size={"icon"} className="text-primary">
+              <PrinterIcon />
+            </Button>
           </div>
         </div>
       </div>

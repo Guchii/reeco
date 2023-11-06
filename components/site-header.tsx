@@ -30,7 +30,6 @@ export function SiteHeader() {
               <ShoppingCart className="w-5 h-5 fill-current" />
               <span className="sr-only">Twitter</span>
             </div>
-            <ThemeToggle />
           </nav>
         </div>
       </div>
