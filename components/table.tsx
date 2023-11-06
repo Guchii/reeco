@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { editProduct } from "@/lib/actions/product"
 import { Status } from "@/lib/reducers/product"
 import { RootState } from "@/lib/store"
+import { cn } from "@/lib/utils"
 import {
   Table,
   TableBody,
@@ -62,7 +63,16 @@ export function ProductsTable() {
             <TableCell className="flex items-center gap-4">
               <div className="flex justify-center flex-1">
                 {product.status ? (
-                  <Badge className="justify-center w-full">
+                  <Badge
+                    className={cn("justify-center w-full", {
+                      "bg-green-100 text-green-700":
+                        product.status === Status.Approved,
+                      "bg-orange-100 text-orange-700":
+                        product.status === Status.Missing,
+                      "bg-red-100 text-red-700":
+                        product.status === Status.MissingUrgent,
+                    })}
+                  >
                     {product.status}
                   </Badge>
                 ) : null}
