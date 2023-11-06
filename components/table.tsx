@@ -91,7 +91,7 @@ export function ProductsTable() {
               >
                 <Check />
               </Button>
-              <MissingDialog id={product.id} />
+              <MissingDialog name={product.name} id={product.id} />
               <EditDialog product={product} />
             </TableCell>
           </TableRow>

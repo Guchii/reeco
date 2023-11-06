@@ -76,9 +76,7 @@ export function EditDialog({
                 return str.length > maxlength
                   ? str.slice(0, maxlength - 1) + "…"
                   : str
-              })(
-                "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid"
-              )}
+              })(product.name)}
             </DialogTitle>
             <DialogDescription>American Roland</DialogDescription>
             <div className="flex items-center gap-4">

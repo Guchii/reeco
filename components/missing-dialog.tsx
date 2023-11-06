@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 
-export function MissingDialog({ id }: { id: string }) {
+export function MissingDialog({ id, name }: { id: string; name: string }) {
   const dispatch = useDispatch()
   return (
     <AlertDialog>
@@ -37,9 +37,7 @@ export function MissingDialog({ id }: { id: string }) {
                 return str.length > maxlength
                   ? str.slice(0, maxlength - 1) + "…"
                   : str
-              })(
-                "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid"
-              )}
+              })(name)}
             </span>{" "}
             urgent?
           </AlertDialogDescription>
