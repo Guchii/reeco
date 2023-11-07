@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "id": "123123124",
+      "name": "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid",
+      "image": "/avocado.jpg",
+      "brand": "Hormen Black Labelmany",
+      "status": "Missing",
+      "price": "250",
+      "quantity": "500"
+    },
+    {
+      "id": "12312545",
+      "name": "Chicken Breast Fillets, Boneless, Marinated 6 ounce Raw, invivid",
+      "image": "/avocado.jpg",
+      "brand": "Hormen Black Labelmany",
+      "status": "Missing",
+      "price": "250",
+      "quantity": "500"
+    }
+  ],
+  "supplier": "East coast fruits & vegetables",
+  "shippingDate": "Thu, Feb 10",
+  "total": "$15,028.3"
+}

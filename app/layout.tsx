@@ -4,7 +4,7 @@ import { Metadata } from "next"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
-import { ReduxProvider } from "@/components/redux-provider"
+import { Providers } from "@/components/providers"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <ReduxProvider>
+          <Providers>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <div className="relative flex flex-col min-h-screen">
                 <SiteHeader />
@@ -49,7 +49,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </div>
               <TailwindIndicator />
             </ThemeProvider>
-          </ReduxProvider>
+          </Providers>
         </body>
       </html>
     </>

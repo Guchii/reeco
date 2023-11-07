@@ -1,6 +1,7 @@
 "use client"
 
 import { nanoid } from "nanoid"
+import toast from "react-hot-toast"
 import { useDispatch } from "react-redux"
 
 import { addProduct } from "@/lib/actions/product"
@@ -13,7 +14,7 @@ export default function AddProduct({}: Props) {
   const dispatch = useDispatch()
   return (
     <Button
-      onClick={() =>
+      onClick={() => {
         dispatch(
           addProduct({
             id: nanoid(),
@@ -25,7 +26,8 @@ export default function AddProduct({}: Props) {
             quantity: "500",
           })
         )
-      }
+        toast.success("Product added")
+      }}
       variant="outline"
       className="border-primary text-primary"
     >
